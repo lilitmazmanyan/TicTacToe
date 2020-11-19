@@ -6,9 +6,19 @@ import {Component, EventEmitter, Output} from '@angular/core';
   styleUrls: ['./introduction.component.css']
 })
 export class IntroductionComponent {
-  @Output() gameStarted = new EventEmitter<void>();
+  @Output() gameStarted = new EventEmitter<string[]>();
+
 
   startTheGame() {
-    this.gameStarted.emit();
+    if (!document.getElementById('playerX').value) {
+      document.getElementById('playerX').value = 'X';
+    }
+    if (!document.getElementById('playerO').value) {
+      document.getElementById('playerO').value = 'Y';
+    }
+
+    const p1 = (document.getElementById('playerX').value);
+    const p2 = (document.getElementById('playerO').value);
+    this.gameStarted.emit({p1, p2});
   }
 }

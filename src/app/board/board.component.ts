@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 @Component({
   selector: 'app-board',
@@ -9,7 +9,12 @@ export class BoardComponent {
   squares: string[];
   xIsNext: boolean;
   winner: string;
+  @Input() playerX: string;
+  @Input() playerO: string;
 
+  constructor() {
+    this.newGame();
+  }
 
   newGame() {
     this.squares = Array(9).fill(null);
@@ -18,7 +23,7 @@ export class BoardComponent {
   }
 
   get player() {
-    return this.xIsNext ? 'X' : 'O';
+    return this.xIsNext ? this.playerX : this.playerO;
   }
 
   makeMove(i: number) {
@@ -48,5 +53,9 @@ export class BoardComponent {
       }
     }
     return null;
+  }
+
+  reload() {
+    location.reload();
   }
 }

@@ -1,8 +1,12 @@
-<h1>Current: {{player}}</h1>
-
-<container>
+<h3>Current: {{player}}</h3>
+<main>
   <app-square
     *ngFor="let val of squares; let i = index"
     [value]="val"
     (click)="makeMove(i)"></app-square>
-</container>
+</main>
+
+<div *ngIf="winner">
+  <h4> {{winner}} won!</h4>
+  <button class="btn btn-primary" (click)="reload()"> Restart</button>
+</div>
