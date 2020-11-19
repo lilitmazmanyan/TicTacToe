@@ -1,10 +1,22 @@
 <h3>Current: {{player}}</h3>
-<main>
-  <app-square
-    *ngFor="let val of squares; let i = index"
-    [value]="val"
-    (click)="makeMove(i)"></app-square>
-</main>
+
+<table>
+  <tr>
+    <td (click)="makeMove($event)" id='0'></td>
+    <td (click)="makeMove($event)" id='1'></td>
+    <td (click)="makeMove($event)" id='2'></td>
+  </tr>
+  <tr>
+    <td (click)="makeMove($event)" id='3'></td>
+    <td (click)="makeMove($event)" id='4'></td>
+    <td (click)="makeMove($event)" id='5'></td>
+  </tr>
+  <tr>
+    <td (click)="makeMove($event)" id='6'></td>
+    <td (click)="makeMove($event)" id='7'></td>
+    <td (click)="makeMove($event)" id='8'></td>
+  </tr>
+</table>
 
 <div *ngIf="winner">
   <h4> {{winner}} won!</h4>
