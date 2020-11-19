@@ -3,8 +3,19 @@ import {Component, Input} from '@angular/core';
 @Component({
   selector: 'app-board',
   templateUrl: './board.component.html',
-  styleUrls: ['./board.component.css']
+  styles: [`table {
+    border: 1px lawngreen solid;
+    width: 300px;
+    height: 300px;
+  }
+
+  tr td {
+    border: 1px lawngreen solid;
+    width: 100px;
+    height: 100px;
+  }`]
 })
+
 export class BoardComponent {
   squares: string[];
   xIsNext: boolean;
@@ -16,22 +27,23 @@ export class BoardComponent {
     this.newGame();
   }
 
+  get player() {
+    return this.xIsNext ? this.playerX : this.playerO;
+  }
+
   newGame() {
     this.squares = Array(9).fill(null);
     this.winner = null;
     this.xIsNext = true;
   }
 
-  get player() {
-    return this.xIsNext ? this.playerX : this.playerO;
-  }
-
-  makeMove(i: number) {
-    if (!this.squares[i]) {
-      this.squares.splice(i, 1, this.player);
+  makeMove(event: Event) {
+    const td = event.currentTarget;
+    if (!this.squares[td.id]) {
+      td.innerHTML = this.player;
+      this.squares.splice(td.id, 1, this.player);
       this.xIsNext = !this.xIsNext;
     }
-
     this.winner = this.calculateWinner();
   }
 
